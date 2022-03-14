@@ -1,10 +1,18 @@
 #include <vector>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
+        if (target <= nums[0] ){
+            return 0;
+        }
+        if (target > *nums.end()){
+            return nums.size();
+        }
+
         return binarysearch(nums, 0, nums.size(), target);
         
     }
@@ -28,8 +36,13 @@ public:
 int main(){
     Solution s;
     //vector nums={1,2,3,4,5,6,7};
-    vector nums={2,3,4,5,8,9,10};
-    int ret = s.searchInsert(nums, 6);
+    vector<int> nums={2,3,4,5,8,9,10};
+    int ret = s.searchInsert(nums, 12);
     cout<<ret<<endl;
+
+    for_each(nums.begin(), nums.end(), [=](auto val){
+        cout<<val<<endl;
+    });
+    
 
 }
