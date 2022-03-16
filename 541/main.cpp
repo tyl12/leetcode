@@ -16,7 +16,7 @@ public:
         }
     }
     string reverseStr(string s, int k) {
-        
+        s.c_str()
     }
 };
 
