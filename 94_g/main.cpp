@@ -90,7 +90,7 @@ public:
             }
         }
     }
-    vector<int> inorderTraversal(TreeNode* root) {
+    vector<int> inorderTraversal5(TreeNode* root) {
         vector<int> result;
         stack<TNW> store;
         auto node = root;
@@ -119,5 +119,34 @@ public:
                 store.push({node->left});
             }
         }
+    }
+
+
+    using Node = pair<TreeNode*, bool>; //is first access
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        stack<Node> st;
+        if (root == nullptr)
+            return result;
+        st.push(Node(root, true));
+        while(!st.empty()){
+            auto node = st.top();
+            st.pop();
+            auto TN = node.first;
+            auto isFirst = node.second;
+            if (TN == nullptr)
+                continue;
+
+            if (isFirst){
+                st.push(Node(TN->right, true));
+                node.second = false;
+                st.push(node);
+                st.push(Node(TN->left, true));
+            }
+            else{
+                result.push_back(TN->val);
+            }
+        }
+        return result;
     }
 };
